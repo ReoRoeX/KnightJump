@@ -39,6 +39,7 @@ public class Main {
         gameWonScreen();
     }
 
+    // TODO: Let's abstract away screens to simplify rendering, consider using GameStates
     static void startScreen() {
         gameData.fixedObject.add(new MousePointer(0,0));
         StartScreen begin = new StartScreen();
@@ -91,6 +92,7 @@ public class Main {
             long timeSpent = endTime - startTime;
             long sleepTime = (long) (1000.0 / FPS - timeSpent);
 
+            // TODO: Look to replace this with a timer utilizing deltatime and not use Thread.sleep()
             try {
                 if(sleepTime > 0) Thread.sleep(sleepTime);
             } catch (InterruptedException e) {
@@ -99,6 +101,7 @@ public class Main {
         }
     }
 
+    // TODO: Look to implement a level file format (json is easy) to simplify enemy placements
     static void levelLayout() {
         Zombie zombie = new Zombie(900,1200);
         Pit pit = new Pit(1000,575);
@@ -174,6 +177,7 @@ public class Main {
         }
     }
 
+    // TODO: Each entity should handle collisions with other entities, rather than hardcoding them here.
     static void processCollisions() {
         var Player = (Knight) Main.gameData.friendObject.get(0);
         for (var enemy: Main.gameData.enemyObject) {

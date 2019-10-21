@@ -20,6 +20,7 @@ public class Zombie extends GameFigure {
     private int left;
     private int right;
     private ZombieAnimStrategy animStrategy;
+    private final int UNIT_MOVE = 250;
 
     public Zombie(int x1, int x2) {
         super(x1, 477);
@@ -31,20 +32,25 @@ public class Zombie extends GameFigure {
 
     @Override
     public void render(Graphics2D g2) {
+
+        // fixes graphical jitter
+        int x = (int)Math.floor(location.x);
+        int y = (int)Math.floor(location.y);
+
         if (!dead) {
             if (facing == 0) {
-                g2.drawImage(animStrategy.animate(), (int) location.x, (int) location.y, width, height, null);
+                g2.drawImage(animStrategy.animate(), x, y, width, height, null);
             } else {
-                g2.drawImage(animStrategy.animate(), (int) location.x + 150, (int) location.y, -width, height, null);
+                g2.drawImage(animStrategy.animate(), x + 150, y, -width, height, null);
             }
         }
         else {
-            g2.drawImage(ded, (int) location.x + 150, (int) location.y + 40, -width, height, null);
+            g2.drawImage(ded, x + 150, y + 40, -width, height, null);
         }
     }
 
     @Override
-    public void update() {
+    public void update(float dt) {
         frames++;
         switch (frames) {
             case 5:
@@ -60,26 +66,26 @@ public class Zombie extends GameFigure {
                 frames = 0;
                 break;
         }
-        left -= UNITS_MOVED;
-        right -= UNITS_MOVED;
+        left -= WORLD_PACE;
+        right -= WORLD_PACE;
         if (!dead) {
             if (facing == 0) {
-                location.x += 5;
+                location.x += (UNIT_MOVE - WORLD_PACE) * dt;
                 if (location.x > right) {
                     facing = 1;
                 }
             } else if (facing == 1) {
-                location.x -= 10;
+                location.x -= UNIT_MOVE * dt;
                 if (location.x < left) {
                     facing = 0;
                 }
             }
             if (right == 0) {
-                this.done = true;
+                //this.done = true;
             }
         }
         else {
-            location.x-=UNITS_MOVED;
+            location.x -= WORLD_PACE * dt;
         }
 
     }

@@ -9,25 +9,25 @@ public class GameData {
     public ArrayList<GameFigure> friendObject = new ArrayList<>();
     public ArrayList<GameFigure> enemyObject = new ArrayList<>();
 
-    public void update() {
+    public void update(float dt) {
         ArrayList<GameFigure> remove = new ArrayList<>();
         for (var fig: fixedObject) {
             if (fig.done) remove.add(fig);
-            else fig.update();
+            else fig.update(dt);
         }
         fixedObject.removeAll(remove);
 
         remove.clear();
         for (var fig: friendObject) {
             if (fig.done) remove.add(fig);
-            else fig.update();
+            else fig.update(dt);
         }
         friendObject.removeAll(remove);
 
         remove.clear();
         for (var fig: enemyObject) {
             if(fig.done) remove.add(fig);
-            else fig.update();
+            else fig.update(dt);
         }
         enemyObject.removeAll(remove);
     }

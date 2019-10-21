@@ -16,12 +16,12 @@ public class Castle extends GameFigure {
 
     @Override
     public void render(Graphics2D g2) {
-        g2.drawImage(Castle,(int)super.location.x,(int)super.location.y, 400,500,null);
+        g2.drawImage(Castle, (int)Math.floor(location.x), (int)Math.floor(location.y), 400, 500,null);
     }
 
     @Override
-    public void update() {
-        super.location.x -= UNITS_MOVED;
+    public void update(float dt) {
+        super.location.x -= WORLD_PACE * dt;
     }
 
     @Override

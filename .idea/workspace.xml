@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="75dd1e4b-abe6-4991-a3fe-59c33e989f81" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/control/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/control/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Background.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Background.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Castle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Castle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/GameData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/GameData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/GameFigure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/GameFigure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/GameOverScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/GameOverScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/GameWonScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/GameWonScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Knight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/MousePointer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/MousePointer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Pit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Pit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/StartScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/StartScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Text.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Text.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/zombie/Zombie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/zombie/Zombie.java" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1SX2aihI4tvV8GyFbZsMd3pcJal" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/School Documents/Spring 2019/OOSW/Term/TrevorF_termproject" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\minal\source\repos\KnightJump\src\control" />
+      <recent name="C:\Users\minal\source\repos\KnightJump\src" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

@@ -5,18 +5,19 @@ import model.zombie.Zombie;
 import view.MyWindow;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class Main {
 
     public static MyWindow win;
     public static GameData gameData;
+    public static LevelLayout levelLayout;
     public static PlayerInputEventQueue playerInputEventQueue;
     public static boolean running = false;
-    public static int xMoved = 0;
     public static boolean gameOver = false;
     public static boolean gameWon = false;
 
-    public static int FPS = 20; //frames per second
+    public static int FPS = 60; //frames per second
 
     public static void main (String[] args) {
         win = new MyWindow();
@@ -25,8 +26,8 @@ public class Main {
         win.setVisible(true);
 
         gameData = new GameData();
+        levelLayout = new LevelLayout(gameData);
         playerInputEventQueue = new PlayerInputEventQueue();
-
 
         startScreen();
         do {
@@ -63,8 +64,35 @@ public class Main {
         Knight Player = new Knight();
         Player.load();
         gameData.friendObject.add(Player);
-        xMoved = 0;
         gameOver = false;
+        running = true;
+
+        // initialize level layout
+        levelLayout.addSpawn(new LevelLayoutSpawn(0,
+            new ArrayList<GameFigure>() {{
+                add(new Pit(600, 575));
+                add(new Zombie(900, 1200));
+            }}
+        ));
+
+        // spawn time is divided by a const divisor based on the original game's spawn system
+
+        float divisor = 20f;
+        levelLayout.addSpawn(new LevelLayoutSpawn(400 / divisor, new Pit(1000, 575)));
+        levelLayout.addSpawn(new LevelLayoutSpawn(900 / divisor, new Zombie(900, 1200)));
+        levelLayout.addSpawn(new LevelLayoutSpawn(1000 / divisor, new Zombie(900, 1200)));
+        levelLayout.addSpawn(new LevelLayoutSpawn(1300 / divisor, new Pit(1000, 575)));
+        levelLayout.addSpawn(new LevelLayoutSpawn(2000 / divisor, new Pit(1000, 575)));
+        levelLayout.addSpawn(new LevelLayoutSpawn(2500 / divisor, new Zombie(900, 1200)));
+        levelLayout.addSpawn(new LevelLayoutSpawn(2700 / divisor, new Zombie(900, 1200)));
+        levelLayout.addSpawn(new LevelLayoutSpawn(2900 / divisor, new Zombie(900, 1200)));
+        levelLayout.addSpawn(new LevelLayoutSpawn(3200 / divisor, new Pit(1000, 575)));
+        levelLayout.addSpawn(new LevelLayoutSpawn(3500 / divisor, new Zombie(900, 1200)));
+        levelLayout.addSpawn(new LevelLayoutSpawn(3600 / divisor, new Zombie(900, 1200)));
+        levelLayout.addSpawn(new LevelLayoutSpawn(3900 / divisor, new Pit(1000, 575)));
+        levelLayout.addSpawn(new LevelLayoutSpawn(4600 / divisor, new Pit(1000, 575)));
+        levelLayout.addSpawn(new LevelLayoutSpawn(5300 / divisor, new Pit(1000, 575)));
+        levelLayout.addSpawn(new LevelLayoutSpawn(6000 / divisor, new Castle(960, 80)));
     }
 
     public static void addBackgroundwithListener (int x, int y) {
@@ -76,104 +104,23 @@ public class Main {
 
 
     static void gameLoop() {
-
-        running = true;
+        long startTime = System.currentTimeMillis();
 
         //game loop
         while (running) {
-            long startTime = System.currentTimeMillis();
-            levelLayout();
-            playerInputEventQueue.processInputEvents();
-            processCollisions();
-            gameData.update();
-            win.canvas.render();
-            long endTime = System.currentTimeMillis();
+            long currentTime = System.currentTimeMillis();
 
-            long timeSpent = endTime - startTime;
-            long sleepTime = (long) (1000.0 / FPS - timeSpent);
+            // use deltatime to update each frame based on a set fps
+            if ((currentTime - startTime) >= 1000 / FPS) {
+                float dt = (currentTime - startTime) * 0.001f; // delta time for physics simulation
+                startTime = currentTime;
 
-            // TODO: Look to replace this with a timer utilizing deltatime and not use Thread.sleep()
-            try {
-                if(sleepTime > 0) Thread.sleep(sleepTime);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                levelLayout.update(dt);
+                playerInputEventQueue.processInputEvents();
+                processCollisions();
+                gameData.update(dt);
+                win.canvas.render();
             }
-        }
-    }
-
-    // TODO: Look to implement a level file format (json is easy) to simplify enemy placements
-    static void levelLayout() {
-        Zombie zombie = new Zombie(900,1200);
-        Pit pit = new Pit(1000,575);
-        switch (xMoved) {
-            case 0:
-                Pit Pit1 = new Pit(600,575);
-                gameData.enemyObject.add(Pit1);
-                Pit1.load();
-                gameData.enemyObject.add(zombie);
-                zombie.load();
-                break;
-            case 400:
-                gameData.enemyObject.add(pit);
-                pit.load();
-                break;
-            case 900:
-                gameData.enemyObject.add(zombie);
-                zombie.load();
-                break;
-            case 1000:
-                gameData.enemyObject.add(zombie);
-                zombie.load();
-                break;
-            case 1300:
-                gameData.enemyObject.add(pit);
-                pit.load();
-                break;
-            case 2000:
-                gameData.enemyObject.add(pit);
-                pit.load();
-                break;
-            case 2500:
-                gameData.enemyObject.add(zombie);
-                zombie.load();
-                break;
-            case 2700:
-                gameData.enemyObject.add(zombie);
-                zombie.load();
-                break;
-            case 2900:
-                gameData.enemyObject.add(zombie);
-                zombie.load();
-                break;
-            case 3200:
-                gameData.enemyObject.add(pit);
-                pit.load();
-                break;
-            case 3500:
-                gameData.enemyObject.add(zombie);
-                zombie.load();
-                break;
-            case 3600:
-                gameData.enemyObject.add(zombie);
-                zombie.load();
-                break;
-            case 3900:
-                gameData.enemyObject.add(pit);
-                pit.load();
-                break;
-            case 4600:
-                gameData.enemyObject.add(pit);
-                pit.load();
-                break;
-            case 5300:
-                gameData.enemyObject.add(pit);
-                pit.load();
-                break;
-            case 6000:
-                Castle castle = new Castle(960, 80);
-                gameData.friendObject.add(castle);
-                 castle.load();
-                break;
         }
     }
 

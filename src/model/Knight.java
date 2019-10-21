@@ -32,7 +32,8 @@ public class Knight extends GameFigure {
 
     public static final int Right = 0;
     public static final int Left = 1;
-    private static final int UNIT_MOVE = 15;
+    private final int UNIT_MOVE = 375;
+    private final int UNIT_JUMP = 250;
 
     public Knight (){
         super(360,477);
@@ -41,31 +42,35 @@ public class Knight extends GameFigure {
     @Override
     public void render(Graphics2D g2) {
 
+        // fixes graphical jitter
+        int x = (int)Math.floor(location.x);
+        int y = (int)Math.floor(location.y);
+
         if (moving && !jumping && !falling && !attacking) {
             switch (super.facing) {
                 case Right:
                     if (runCycle == 0) {
                         if(hitCount == 0){
-                        g2.drawImage(ArmorRun1, (int) super.location.x, (int) super.location.y, width, height, null); }
-                        else {g2.drawImage(NakeyRun1, (int) super.location.x, (int) super.location.y, width, height, null);}
+                        g2.drawImage(ArmorRun1, x, y, width, height, null); }
+                        else {g2.drawImage(NakeyRun1, x, y, width, height, null);}
 
                     } else if (runCycle == 1) {
                         if(hitCount == 0){
-                        g2.drawImage(ArmorRun2, (int) super.location.x, (int) super.location.y, width, height, null);}
-                        else {g2.drawImage(NakeyRun2, (int) super.location.x, (int) super.location.y, width, height, null);}
+                        g2.drawImage(ArmorRun2, x, y, width, height, null);}
+                        else {g2.drawImage(NakeyRun2, x, y, width, height, null);}
 
                     }
                     break;
                 case Left:
                     if (runCycle == 0) {
                         if(hitCount == 0){
-                        g2.drawImage(ArmorRun1, (int) super.location.x + 150, (int) super.location.y, -width, height, null);}
-                        else {g2.drawImage(NakeyRun1, (int) super.location.x + 150, (int) super.location.y, -width, height, null);}
+                        g2.drawImage(ArmorRun1, x + 150, y, -width, height, null);}
+                        else {g2.drawImage(NakeyRun1, x + 150, y, -width, height, null);}
 
                     } else if (runCycle == 1) {
                         if(hitCount == 0){
-                        g2.drawImage(ArmorRun2, (int) super.location.x + 150, (int) super.location.y, -width, height, null);}
-                        else {g2.drawImage(NakeyRun2, (int) super.location.x + 150, (int) super.location.y, -width, height, null);}
+                        g2.drawImage(ArmorRun2, x + 150, y, -width, height, null);}
+                        else {g2.drawImage(NakeyRun2, x + 150, y, -width, height, null);}
 
                     }
                     break;
@@ -75,13 +80,13 @@ public class Knight extends GameFigure {
             switch (super.facing) {
                 case Right:
                     if (hitCount == 0){
-                    g2.drawImage(ArmorJump, (int) super.location.x, (int) super.location.y, width, height, null); }
-                    else {g2.drawImage(NakeyJump, (int) super.location.x, (int) super.location.y, width, height, null);}
+                    g2.drawImage(ArmorJump, x, y, width, height, null); }
+                    else {g2.drawImage(NakeyJump, x, y, width, height, null);}
                     break;
                 case Left:
                     if (hitCount == 0) {
-                    g2.drawImage(ArmorJump, (int) super.location.x + 150, (int) super.location.y, -width, height, null); }
-                    else {g2.drawImage(NakeyJump, (int) super.location.x + 150, (int) super.location.y, -width, height, null);}
+                    g2.drawImage(ArmorJump, x + 150, y, -width, height, null); }
+                    else {g2.drawImage(NakeyJump, x + 150, y, -width, height, null);}
                     break;
             }
         }
@@ -90,61 +95,61 @@ public class Knight extends GameFigure {
                 case Right:
                     if(attackCycle == 0) {
                         if(hitCount == 0){
-                        g2.drawImage(ArmorAttack1, (int) super.location.x, (int) super.location.y, width, height, null); }
-                        else {g2.drawImage(NakeyAttack1, (int) super.location.x, (int) super.location.y, width, height, null); }
+                        g2.drawImage(ArmorAttack1, x, y, width, height, null); }
+                        else {g2.drawImage(NakeyAttack1, x, y, width, height, null); }
                     }
                     else if (attackCycle == 1) {
                         if(hitCount == 0){
-                        g2.drawImage(ArmorAttack2, (int) super.location.x, (int) super.location.y, width, height, null);}
-                        else {g2.drawImage(NakeyAttack2, (int) super.location.x, (int) super.location.y, width, height, null);}
+                        g2.drawImage(ArmorAttack2, x, y, width, height, null);}
+                        else {g2.drawImage(NakeyAttack2, x, y, width, height, null);}
                     }
                     break;
                 case Left:
                     if(attackCycle == 0) {
                         if (hitCount == 0){
-                        g2.drawImage(ArmorAttack1, (int) super.location.x + 150, (int) super.location.y, -width, height, null);}
-                        else {g2.drawImage(NakeyAttack1, (int) super.location.x + 150, (int) super.location.y, -width, height, null);}
+                        g2.drawImage(ArmorAttack1, x + 150, y, -width, height, null);}
+                        else {g2.drawImage(NakeyAttack1, x + 150, y, -width, height, null);}
                     }
                     else if (attackCycle == 1) {
                         if (hitCount == 0){
-                        g2.drawImage(ArmorAttack2, (int) super.location.x + 150, (int) super.location.y, -width, height, null);}
-                        else {g2.drawImage(NakeyAttack2, (int) super.location.x + 150, (int) super.location.y, -width, height, null);}
+                        g2.drawImage(ArmorAttack2, x + 150, y, -width, height, null);}
+                        else {g2.drawImage(NakeyAttack2, x + 150, y, -width, height, null);}
                     }
                     break;
             }
         }
         if (damage) {
-            g2.drawImage(hit, (int)location.x, (int)location.y, width, height, null);
+            g2.drawImage(hit, x, y, width, height, null);
         }
         else if (!moving && !jumping && !attacking && !falling) {
             switch (super.facing) {
                 case Right:
                     if(hitCount== 0){
-                    g2.drawImage(ArmorStand, (int) super.location.x, (int)super.location.y, width, height, null);}
-                    else {g2.drawImage(NakeyStand, (int) super.location.x, (int)super.location.y, width, height, null);}
+                    g2.drawImage(ArmorStand, x, y, width, height, null);}
+                    else {g2.drawImage(NakeyStand, x, y, width, height, null);}
                     break;
                 case Left:
                     if (hitCount == 0){
-                    g2.drawImage(ArmorStand, (int) super.location.x + 150, (int)super.location.y, -width, height, null);}
-                    else {g2.drawImage(NakeyStand, (int) super.location.x + 150, (int)super.location.y, -width, height, null);}
+                    g2.drawImage(ArmorStand, x + 150, y, -width, height, null);}
+                    else {g2.drawImage(NakeyStand, x + 150, y, -width, height, null);}
                     break;
             }
         }
     }
 
     @Override
-    public void update() {
+    public void update(float dt) {
 
         if (moving) {
             switch (facing) {
                 case Right:
                     if (super.location.x < 850) {
-                            super.location.x += UNIT_MOVE;
+                            super.location.x += UNIT_MOVE * dt;
                         break;
                     }
                 case Left:
                     if (super.location.x >= 0) {
-                            super.location.x -= UNIT_MOVE;
+                            super.location.x -= UNIT_MOVE * dt;
 
                         break;
                     }
@@ -159,7 +164,7 @@ public class Knight extends GameFigure {
         }
         if (jumping) {
             if (super.location.y >= 377 && !falling) {
-                super.location.y -= 10;
+                super.location.y -= UNIT_JUMP * dt;
             }
             else {
                 falling = true;
@@ -168,7 +173,7 @@ public class Knight extends GameFigure {
         }
         if (falling) {
             if (super.location.y <= 477) {
-                super.location.y += 10;
+                super.location.y += UNIT_JUMP * dt;
             } else {
                 falling = false;
             }
@@ -187,15 +192,15 @@ public class Knight extends GameFigure {
         else{
             switch (facing) {
                 case Left:
-                    if (super.location.x > 150) super.location.x -= UNITS_MOVED;
+                    if (super.location.x > 150) super.location.x -= WORLD_PACE * dt;
                     break;
                 case Right:
-                    if (super.location.x > 0) super.location.x -= UNITS_MOVED;
+                    if (super.location.x > 0) super.location.x -= WORLD_PACE * dt;
                     break;
             }
         }
         if (damage) {
-            location.x -= 30;
+            location.x -= 30 * dt;
             damageFrames++;
             if (damageFrames == 5) {
                 damageFrames = 0;

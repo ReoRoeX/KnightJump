@@ -28,7 +28,7 @@ public class Knight extends GameFigure {
     private int runCycle = 0;
     private int attackFrames = 0;
     private int attackCycle = 0;
-    private int damageFrames= 0;
+    private float damageFrames= 0;
 
     public static final int Right = 0;
     public static final int Left = 1;
@@ -201,8 +201,8 @@ public class Knight extends GameFigure {
         }
         if (damage) {
             location.x -= 30 * dt;
-            damageFrames++;
-            if (damageFrames == 5) {
+            damageFrames += dt;
+            if (damageFrames >= 0.5f) {
                 damageFrames = 0;
                 damage = false;
             }

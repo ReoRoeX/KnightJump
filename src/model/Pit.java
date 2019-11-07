@@ -16,12 +16,12 @@ public class Pit extends GameFigure {
 
     @Override
     public void render(Graphics2D g2) {
-        g2.drawImage(Pit,(int)super.location.x,(int)super.location.y,null);
+        g2.drawImage(Pit, (int)Math.floor(location.x), (int)Math.floor(location.y), null);
     }
 
     @Override
-    public void update() {
-        super.location.x -= UNITS_MOVED;
+    public void update(float dt) {
+        super.location.x -= WORLD_PACE * dt;
     }
 
     @Override

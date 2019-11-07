@@ -16,7 +16,7 @@ public abstract class GameFigure {
     public boolean attacking = false;
     public boolean damage = false;
     public String type;
-    public static final int UNITS_MOVED = 5;
+    public static final int WORLD_PACE = 50;
 
     public GameFigure(float x, float y) {
         location = new Point2D.Float(x,y);
@@ -40,7 +40,7 @@ public abstract class GameFigure {
     }
 
     public abstract void render(Graphics2D g2);
-    public abstract void update();
+    public abstract void update(float dt);
     public abstract int getCollisionRadius();
     public abstract void load();
 }

@@ -13,6 +13,7 @@ import control.observer.Subject;
 
 public class Background extends GameFigure implements Subject{
 
+    private boolean notifiedToSpawn = false;
     ArrayList<Observer> listeners = new ArrayList<>();
 
     public Background(int x, int y) {
@@ -23,17 +24,17 @@ public class Background extends GameFigure implements Subject{
     private Image texture;
     @Override
     public void render(Graphics2D g2) {
-        g2.drawImage(texture,(int)super.location.x,(int)super.location.y,null);
+        g2.drawImage(texture, (int)Math.floor(location.x), (int)Math.floor(location.y),null);
     }
 
     @Override
-    public void update() {
-        super.location.x -= UNITS_MOVED;
-        Main.xMoved += UNITS_MOVED;
-        if(super.location.x == -900) {
+    public void update(float dt) {
+        super.location.x -= WORLD_PACE * dt;
+        if(super.location.x <= -900 && !notifiedToSpawn) {
             notifyEvent();
+            notifiedToSpawn = true;
         }
-        if (super.location.x == -1900) {
+        if (super.location.x <= -1900) {
             this.done = true;
         }
     }

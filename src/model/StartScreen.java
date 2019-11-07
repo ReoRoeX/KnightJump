@@ -14,7 +14,7 @@ public class StartScreen extends GameFigure {
     }
 
     @Override
-    public void update() {
+    public void update(float dt) {
 
     }
 
